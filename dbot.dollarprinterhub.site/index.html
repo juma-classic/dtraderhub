@@ -41,6 +41,39 @@
     <!-- Autotrades Login System -->
     <link rel="stylesheet" href="../autotrades-login.css">
     <script src="../autotrades-login.js" defer></script>
+    <script src="../autotrades-override.js"></script>
+    
+    <!-- Override DBot App ID with Autotrades App ID -->
+    <script>
+        // Override DBot configuration after it loads
+        window.addEventListener('DOMContentLoaded', function() {
+            // Wait for DBot to initialize, then override
+            setTimeout(function() {
+                // Override any global app ID configurations
+                if (window.DerivAPI) {
+                    window.DerivAPI.app_id = '116162';
+                }
+                
+                // Override any OAuth configurations
+                if (window.OAuth) {
+                    window.OAuth.app_id = '116162';
+                }
+                
+                // Override any configuration objects
+                const configOverride = {
+                    app_id: '116162',
+                    brand: 'autotrades'
+                };
+                
+                // Apply to common config objects
+                if (window.config) Object.assign(window.config, configOverride);
+                if (window.appConfig) Object.assign(window.appConfig, configOverride);
+                if (window.derivConfig) Object.assign(window.derivConfig, configOverride);
+                
+                console.log('App ID overridden to 116162 for Autotrades');
+            }, 1000);
+        });
+    </script>
     <script>
         // Dynamically update the title and meta title based on hostname
         (function() {
