@@ -37,6 +37,8 @@ A comprehensive trading bot platform built on D-Bot technology, featuring automa
    npx serve dbot.dollarprinterhub.site -p 8000
    ```
 
+   **Note:** The site will be accessible at `https://autotrades.site` when deployed.
+
 3. **Open in browser**
    ```
    http://localhost:8000

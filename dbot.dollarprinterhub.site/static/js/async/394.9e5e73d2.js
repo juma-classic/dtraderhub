@@ -1025,7 +1025,7 @@
                             whatsapp: "https://whatsapp.com/channel/0029VaWuMaXJENyAlkol1D14"
                         }
                     },
-                    "dbot.dollarprinterhub.site": {
+                    "autotrades.site": {
                         name: "D-Traders",
                         social: {
                             whatsapp: "https://whatsapp.com/channel/0029VbB3YovCxoB0aLFFPm0A",
@@ -2086,7 +2086,7 @@
                             whatsapp: "https://whatsapp.com/channel/0029VaWuMaXJENyAlkol1D14"
                         }
                     },
-                    "dbot.dollarprinterhub.site": {
+                    "autotrades.site": {
                         name: "D-Traders",
                         social: {
                             whatsapp: "https://whatsapp.com/channel/0029VbB3YovCxoB0aLFFPm0A",

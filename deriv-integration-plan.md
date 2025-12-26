@@ -43,7 +43,7 @@ api.basic.subscribe({
 ### User Authentication
 ```javascript
 // OAuth login with Deriv
-const authUrl = `https://oauth.deriv.com/oauth2/authorize?app_id=117968`;
+const authUrl = `https://oauth.deriv.com/oauth2/authorize?app_id=117968&redirect_uri=https://autotrades.site`;
 
 // Handle login callback
 api.basic.authorize(token).then(response => {
