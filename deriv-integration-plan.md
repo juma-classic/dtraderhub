@@ -5,7 +5,7 @@
 ```javascript
 // 1. Get Deriv API credentials
 const api = new DerivAPI({
-    app_id: '117968', // Your registered Deriv app ID
+    app_id: '116162', // Your registered Deriv app ID
     endpoint: 'wss://ws.binaryws.com/websockets/v3'
 });
 
@@ -43,7 +43,7 @@ api.basic.subscribe({
 ### User Authentication
 ```javascript
 // OAuth login with Deriv
-const authUrl = `https://oauth.deriv.com/oauth2/authorize?app_id=117968&redirect_uri=https://autotrades.site`;
+const authUrl = `https://oauth.deriv.com/oauth2/authorize?app_id=116162&redirect_uri=https://autotrades.site`;
 
 // Handle login callback
 api.basic.authorize(token).then(response => {
@@ -107,7 +107,7 @@ const express = require('express');
 const { DerivAPI } = require('@deriv/deriv-api');
 
 const app = express();
-const api = new DerivAPI({ app_id: 117968 });
+const api = new DerivAPI({ app_id: 116162 });
 
 app.use(cors());
 app.use(express.json());
