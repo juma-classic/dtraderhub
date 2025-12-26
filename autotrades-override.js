@@ -1,6 +1,6 @@
 /**
  * Autotrades App ID Override System
- * Targeted override to fix OAuth app ID without breaking DBot
+ * Safe override that doesn't modify read-only properties
  */
 
 (function() {
@@ -9,12 +9,7 @@
     const AUTOTRADES_APP_ID = '116162';
     const AUTOTRADES_BRAND = 'autotrades';
     
-    console.log('🚀 Autotrades Override: Initializing targeted app ID override');
-    
-    // Store original functions
-    let originalLocationReplace = window.location.replace;
-    let originalLocationAssign = window.location.assign;
-    let originalWindowOpen = window.open;
+    console.log('🚀 Autotrades Override: Initializing safe app ID override');
     
     // Function to override OAuth URLs only
     function overrideOAuthUrl(url) {
@@ -37,90 +32,141 @@
         return url;
     }
     
-    // Override window.location.replace (most common method)
-    window.location.replace = function(url) {
-        return originalLocationReplace.call(this, overrideOAuthUrl(url));
-    };
-    
-    // Override window.location.assign
-    window.location.assign = function(url) {
-        return originalLocationAssign.call(this, overrideOAuthUrl(url));
-    };
-    
-    // Override window.open
-    window.open = function(url, name, features) {
-        return originalWindowOpen.call(this, overrideOAuthUrl(url), name, features);
-    };
-    
-    // Monitor for getOauthURL function and patch it when it appears
+    // Safe override approach - intercept at the source
     let checkCount = 0;
-    const maxChecks = 50; // Check for 50 seconds max
+    const maxChecks = 30;
     
-    function patchGetOauthURL() {
+    function findAndPatchOAuthFunctions() {
         checkCount++;
+        let patched = false;
         
-        // Look for the getOauthURL function in various possible locations
-        const possibleLocations = [
-            window,
-            window.DerivAPI,
-            window.OAuth,
-            window.config,
-            window.appConfig
+        // Look for common OAuth-related objects and functions
+        const targets = [
+            { obj: window, path: 'getOauthURL' },
+            { obj: window.DerivAPI, path: 'getOauthURL' },
+            { obj: window.OAuth, path: 'getOauthURL' },
+            { obj: window.config, path: 'getOauthURL' },
+            { obj: window.appConfig, path: 'getOauthURL' }
         ];
         
-        let found = false;
-        
-        possibleLocations.forEach(obj => {
-            if (obj && typeof obj === 'object') {
-                // Check for getOauthURL function
-                if (typeof obj.getOauthURL === 'function') {
-                    const original = obj.getOauthURL;
-                    obj.getOauthURL = function() {
-                        const url = original.apply(this, arguments);
-                        return overrideOAuthUrl(url);
-                    };
-                    console.log('🔧 Autotrades Override: Patched getOauthURL function');
-                    found = true;
-                }
-                
-                // Check for nested objects
-                Object.keys(obj).forEach(key => {
-                    if (obj[key] && typeof obj[key] === 'object' && typeof obj[key].getOauthURL === 'function') {
-                        const original = obj[key].getOauthURL;
-                        obj[key].getOauthURL = function() {
-                            const url = original.apply(this, arguments);
-                            return overrideOAuthUrl(url);
-                        };
-                        console.log(`🔧 Autotrades Override: Patched ${key}.getOauthURL function`);
-                        found = true;
-                    }
-                });
+        targets.forEach(target => {
+            if (target.obj && typeof target.obj[target.path] === 'function') {
+                const original = target.obj[target.path];
+                target.obj[target.path] = function() {
+                    const url = original.apply(this, arguments);
+                    return overrideOAuthUrl(url);
+                };
+                console.log(`🔧 Autotrades Override: Patched ${target.path} function`);
+                patched = true;
             }
         });
         
+        // Look for nested objects that might contain OAuth functions
+        if (window.modules) {
+            Object.keys(window.modules).forEach(key => {
+                const module = window.modules[key];
+                if (module && typeof module.getOauthURL === 'function') {
+                    const original = module.getOauthURL;
+                    module.getOauthURL = function() {
+                        const url = original.apply(this, arguments);
+                        return overrideOAuthUrl(url);
+                    };
+                    console.log(`🔧 Autotrades Override: Patched modules.${key}.getOauthURL`);
+                    patched = true;
+                }
+            });
+        }
+        
         // Continue checking if not found and within limit
-        if (!found && checkCount < maxChecks) {
-            setTimeout(patchGetOauthURL, 1000);
-        } else if (found) {
-            console.log('✅ Autotrades Override: Successfully patched OAuth URL generation');
+        if (!patched && checkCount < maxChecks) {
+            setTimeout(findAndPatchOAuthFunctions, 1000);
+        } else if (patched) {
+            console.log('✅ Autotrades Override: Successfully patched OAuth functions');
         }
     }
     
-    // Start monitoring for getOauthURL function
-    setTimeout(patchGetOauthURL, 1000);
-    
-    // Also check when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(patchGetOauthURL, 500);
+    // Alternative approach: Monitor for OAuth redirects using MutationObserver
+    function monitorForRedirects() {
+        // Watch for any changes that might trigger redirects
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                // Check if any new elements might trigger OAuth
+                if (mutation.type === 'childList') {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1) { // Element node
+                            // Check for links or buttons that might trigger OAuth
+                            const oauthElements = node.querySelectorAll ? 
+                                node.querySelectorAll('a[href*="oauth.deriv.com"], button[onclick*="oauth"]') : [];
+                            
+                            oauthElements.forEach(function(element) {
+                                if (element.href && element.href.includes('oauth.deriv.com')) {
+                                    element.href = overrideOAuthUrl(element.href);
+                                    console.log('🔧 Autotrades Override: Fixed OAuth link');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
         });
     }
     
-    // Check when page is fully loaded
-    window.addEventListener('load', () => {
-        setTimeout(patchGetOauthURL, 1000);
+    // Intercept click events that might trigger OAuth
+    document.addEventListener('click', function(event) {
+        const target = event.target;
+        
+        // Check if clicked element might trigger OAuth
+        if (target.tagName === 'BUTTON' || target.tagName === 'A') {
+            // Look for OAuth-related attributes or content
+            const text = target.textContent || target.innerText || '';
+            const onclick = target.getAttribute('onclick') || '';
+            
+            if (text.toLowerCase().includes('log') || 
+                text.toLowerCase().includes('sign') ||
+                onclick.includes('oauth') ||
+                onclick.includes('login')) {
+                
+                console.log('🔍 Autotrades Override: Login-related click detected');
+                
+                // Small delay to allow any OAuth URL generation to complete
+                setTimeout(() => {
+                    // Check if current URL is an OAuth redirect and fix it
+                    if (window.location.href.includes('oauth.deriv.com')) {
+                        const correctedUrl = overrideOAuthUrl(window.location.href);
+                        if (correctedUrl !== window.location.href) {
+                            console.log('🔄 Autotrades Override: Correcting OAuth redirect');
+                            window.history.replaceState(null, '', correctedUrl);
+                        }
+                    }
+                }, 100);
+            }
+        }
     });
     
-    console.log('✅ Autotrades Override: Targeted override system initialized');
+    // Start monitoring
+    setTimeout(findAndPatchOAuthFunctions, 1000);
+    
+    // Set up DOM monitoring when ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(monitorForRedirects, 500);
+            setTimeout(findAndPatchOAuthFunctions, 1000);
+        });
+    } else {
+        monitorForRedirects();
+        setTimeout(findAndPatchOAuthFunctions, 500);
+    }
+    
+    // Also check when page is fully loaded
+    window.addEventListener('load', () => {
+        setTimeout(findAndPatchOAuthFunctions, 1000);
+    });
+    
+    console.log('✅ Autotrades Override: Safe override system initialized');
     
 })();
