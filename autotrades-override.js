@@ -11,6 +11,31 @@
     
     console.log('🚀 Autotrades Override: Initializing app ID override system');
     
+    // AGGRESSIVE OVERRIDE: Patch the X() function that returns app ID
+    let originalX = null;
+    
+    function patchAppIdFunction() {
+        // Look for the X function in the global scope
+        if (window.X && typeof window.X === 'function') {
+            if (!originalX) {
+                originalX = window.X;
+                console.log('🔧 Autotrades Override: Patching X() function');
+            }
+            window.X = function() {
+                console.log('🔄 Autotrades Override: X() called, returning', AUTOTRADES_APP_ID);
+                return AUTOTRADES_APP_ID;
+            };
+        }
+        
+        // Also patch any getAppId functions
+        if (window.getAppId && typeof window.getAppId === 'function') {
+            window.getAppId = function() {
+                console.log('🔄 Autotrades Override: getAppId() called, returning', AUTOTRADES_APP_ID);
+                return AUTOTRADES_APP_ID;
+            };
+        }
+    }
+    
     // Override window.location methods to intercept OAuth redirects
     const originalReplace = window.location.replace;
     const originalAssign = window.location.assign;
@@ -61,6 +86,29 @@
         return originalFetch.call(this, input, init);
     };
     
+    // AGGRESSIVE: Override localStorage to force app ID
+    const originalSetItem = localStorage.setItem;
+    const originalGetItem = localStorage.getItem;
+    
+    localStorage.setItem = function(key, value) {
+        // If someone tries to set an app ID, override it
+        if (key && (key.includes('app_id') || key.includes('appId'))) {
+            console.log('🔧 Autotrades Override: Intercepting localStorage.setItem for app ID');
+            value = AUTOTRADES_APP_ID;
+        }
+        return originalSetItem.call(this, key, value);
+    };
+    
+    localStorage.getItem = function(key) {
+        const value = originalGetItem.call(this, key);
+        // If someone requests an app ID, return ours
+        if (key && (key.includes('app_id') || key.includes('appId')) && value && value !== AUTOTRADES_APP_ID) {
+            console.log('🔧 Autotrades Override: Intercepting localStorage.getItem for app ID, returning', AUTOTRADES_APP_ID);
+            return AUTOTRADES_APP_ID;
+        }
+        return value;
+    };
+    
     // Monitor for dynamic configuration changes
     function overrideConfigurations() {
         const configObjects = [
@@ -99,13 +147,16 @@
                 window.OAuth.app_id = AUTOTRADES_APP_ID;
             }
         }
+        
+        // Patch the X() function
+        patchAppIdFunction();
     }
     
     // Run configuration override immediately and periodically
     overrideConfigurations();
     
-    // Set up periodic checks
-    setInterval(overrideConfigurations, 2000);
+    // Set up aggressive periodic checks
+    setInterval(overrideConfigurations, 1000);
     
     // Override on DOM ready
     if (document.readyState === 'loading') {
@@ -119,6 +170,13 @@
         if (!document.hidden) {
             setTimeout(overrideConfigurations, 100);
         }
+    });
+    
+    // Override when scripts load
+    window.addEventListener('load', function() {
+        setTimeout(overrideConfigurations, 500);
+        setTimeout(overrideConfigurations, 1000);
+        setTimeout(overrideConfigurations, 2000);
     });
     
     console.log('✅ Autotrades Override: System initialized successfully');
