@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" dir="auto">
+
+<head>
+    <meta charset="UTF-8" />
+    <link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="/deriv-logo.svg" />
+    <script>
+        // Map domains to their respective favicons
+        const domainFavicons = {
+            'www.smartdollarhub.site': '/gamer.jpeg',
+            'money.binarytool.site': '/money.jpeg',
+            'www.derexhub.site': '/derex.jpeg',
+            'www.primetrades.net': '/prime.png',
+            'default': '/deriv-logo.svg'
+        };
+
+        // Set favicon based on current domain
+        (function() {
+            const currentDomain = window.location.hostname;
+            const favicon = document.getElementById('dynamic-favicon');
+            const faviconPath = domainFavicons[currentDomain] || domainFavicons['default'];
+
+            // Set appropriate MIME type based on file extension
+            const extension = faviconPath.split('.').pop();
+            favicon.type = `image/${extension === 'svg' ? 'svg+xml' : extension}`;
+            favicon.href = faviconPath;
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta id="dynamic-meta-title" name="title" content="Build a trading bot without coding | D-Bot." />
+    <meta name="description" content="Import your current bot or learn how to create a trading bot from scratch with our detailed guides, FAQs, and tutorials. Start with a quick strategy!" />
+    <meta property="og:title" content="D-Bot" />
+    <meta property="og:description" content="Import your current bot or learn how to create a trading bot from scratch with our detailed guides, FAQs, and tutorials. Start with a quick strategy!" />
+    <title id="dynamic-title"></title>
+    <style>
+        :root {
+            font-size: 62.5%;
+        }
+    </style>
+    <script>
+        // Dynamically update the title and meta title based on hostname
+        (function() {
+            const host = window.location.hostname;
+            let siteTitle = '';
+            if (host) {
+                siteTitle = `${host} | Home of free trading bots`;
+            } else {
+                siteTitle = 'Home of free trading bots';
+            }
+            // Update <title>
+            const titleEl = document.getElementById('dynamic-title');
+            if (titleEl) titleEl.textContent = siteTitle;
+            // Update <meta name="title">
+            const metaTitleEl = document.getElementById('dynamic-meta-title');
+            if (metaTitleEl) metaTitleEl.setAttribute('content', siteTitle);
+        })();
+    </script>
+    <script>
+        // Browser compatibility check
+        function checkBrowserSupport() {
+            try {
+                // Test optional chaining and nullish coalescing
+                eval('const test = {}; test?.prop ?? "fallback";');
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+        
+        if (!checkBrowserSupport()) {
+            document.body.innerHTML = `
+                <div style="padding: 40px; text-align: center; font-family: Arial, sans-serif;">
+                    <h1>Browser Update Required</h1>
+                    <p>This D-Bot trading application requires a modern browser.</p>
+                    <p>Please update to:</p>
+                    <ul style="display: inline-block; text-align: left;">
+                        <li>Chrome 80+ or Edge 80+</li>
+                        <li>Firefox 72+</li>
+                        <li>Safari 13.1+</li>
+                    </ul>
+                    <p><a href="https://browsehappy.com/" target="_blank">Update your browser here</a></p>
+                </div>
+            `;
+            throw new Error('Unsupported browser');
+        }
+    </script>
+    <!-- Browser compatibility polyfills -->
+    <script>
+        // Polyfill for optional chaining (?.) and nullish coalescing (??)
+        if (!window.chrome || parseInt(window.chrome.runtime?.getManifest?.()?.version || '0') < 80) {
+            console.warn('This site requires a modern browser. Please update your browser for the best experience.');
+        }
+    </script>
+    <script defer src="/static/js/lib-react.7e3f0832.js"></script>
+    <script defer src="/static/js/lib-router.13959373.js"></script>
+    <script defer src="/static/js/751.93e1b9af.js"></script>
+    <script defer src="/static/js/index.16f3d93e.js"></script>
+    <link href="/static/css/751.ced10a23.css" rel="stylesheet">
+    <link href="/static/css/index.aa688c01.css" rel="stylesheet">
+</head>
+
+<body class="body theme theme--light">
+    <div id="modal_root" class="modal-root"></div>
+    <div id="popup_root" class="popup-root"></div>
+    <div id="root"></div>
+    <!-- LiveChat script -->
+    <script type="text/javascript" defer>
+        window.__lc = window.__lc || {};
+        window.__lc.license = 12049137;
+        window.__lc.asyncInit = true;
+        (function(n, t, c) {
+            function i(n) {
+                return e._h ? e._h.apply(null, n) : e._q.push(n);
+            }
+            var e = {
+                _q: [],
+                _h: null,
+                _v: '2.0',
+                on: function() {
+                    i(['on', c.call(arguments)]);
+                },
+                once: function() {
+                    i(['once', c.call(arguments)]);
+                },
+                off: function() {
+                    i(['off', c.call(arguments)]);
+                },
+                get: function() {
+                    if (!e._h) throw new Error('[LiveChatWidget] You can’t use getters before load.');
+                    return i(['get', c.call(arguments)]);
+                },
+                call: function() {
+                    i(['call', c.call(arguments)]);
+                },
+                init: function() {
+                    setTimeout(() => {
+                        var n = t.createElement('script');
+                        (n.async = !0),
+                        (n.type = 'text/javascript'),
+                        (n.src = 'https://cdn.livechatinc.com/tracking.js'),
+                        t.head.appendChild(n);
+                    }, 3000);
+                },
+            };
+            !n.__lc.asyncInit && e.init(), (n.LiveChatWidget = n.LiveChatWidget || e);
+        })(window, document, [].slice);
+    </script>
+    <!-- End LiveChat script -->
+</body>
+
+</html>

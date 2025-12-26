@@ -1,0 +1,504 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <variables>
+    <variable id="LmE|+R/nSd8{j+h%UK?a">Ufo stake</variable>
+    <variable id="w/hY)NyDi)f90A6De;b7">ufo martingale stake</variable>
+    <variable id="tE#0Luv|#b/KKmH;4HBY">ufo martingale size</variable>
+    <variable id="U9kr51T48qB5*Rf:pUwM">ufo odd count</variable>
+    <variable id="jvfK:Rrnx^y:1z]yxlt*">ufo trade type</variable>
+    <variable id="88L3cc]lb7k)$o16XSV!">ufo target profit</variable>
+    <variable id="#d@L(2G@#rT{+ZEnZjY]">ufo even count</variable>
+    <variable id="lh+|6|zk1kY]hk]ccg/t">ufo stop loss</variable>
+    <variable id="|%g]sUNDZ6?2m3E$6@38">ufo digit list</variable>
+    <variable id="MOovH8rV:MC)Qj78ZBiR">text</variable>
+    <variable id="lv?kk}wM0*2UAv_r{qf.">i</variable>
+  </variables>
+  <block type="after_purchase" id="x#Nd8j7R=GlxBUW}QpSk" x="973" y="0">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="controls_if" id="ZZ7#EN3S(#wrot{Q6]%s">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="contract_check_result" id="V3QpyplAotu$81$k(g^x">
+            <field name="CHECK_RESULT">win</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="0Z^S;p~4Z^DzS:9lH)KD">
+            <field name="VAR" id="w/hY)NyDi)f90A6De;b7">ufo martingale stake</field>
+            <value name="VALUE">
+              <block type="variables_get" id="np^eb7~AV/A/:W(sMsS.">
+                <field name="VAR" id="LmE|+R/nSd8{j+h%UK?a">Ufo stake</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="K@K[Utfjz2!lnKg7DbN}">
+                <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="U8%0[qGI$fwJp_l~+E}#">
+                    <field name="OP">GTE</field>
+                    <value name="A">
+                      <block type="total_profit" id="DcDdiHi0|U1E!RwULS=Y"></block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="!/4~/2Kr[A)ERlB{-2(I">
+                        <field name="VAR" id="88L3cc]lb7k)$o16XSV!">ufo target profit</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="text_print" id="|Bdb3T@;lsekP:#dq6?*">
+                    <value name="TEXT">
+                      <shadow type="text" id="$hr~Hr)+KFh?Bo)soAdU">
+                        <field name="TEXT">THE UFO HITS TARGET PROFIT</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="trade_again" id="wa=7~04;oGlZnC?.W4zn"></block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="}{p1#=G(|y/4}zH1K;~*">
+            <field name="VAR" id="w/hY)NyDi)f90A6De;b7">ufo martingale stake</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="pm@Ek67-*QezNd_]Uh;%">
+                <field name="OP">MULTIPLY</field>
+                <value name="A">
+                  <shadow type="math_number" id="mM$o^oi^Kz|5FOEqPcv$">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id="n?#!YGx?mDCuW[5UMkqZ">
+                    <field name="VAR" id="w/hY)NyDi)f90A6De;b7">ufo martingale stake</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="eHU=:^[`sd6Su7Oa/p0:">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id="zUWT_@LVL:0?bDKcC^z@">
+                    <field name="VAR" id="tE#0Luv|#b/KKmH;4HBY">ufo martingale size</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="LPB3@Ue4.yD}AGVwH,Nr">
+                <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare" id="oKcnslXq0;4OnwLFnKUY">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="math_arithmetic" id="aBlZ4Sa1}6L,rJfWT;E:">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <shadow type="math_number" id="A!!~(!bccYW2$4/px?rx">
+                            <field name="NUM">1</field>
+                          </shadow>
+                          <block type="total_profit" id="B:1MI`gsZ~ly{l1A3d^L"></block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id="=D:NKJ]@~*L?mKEMO5rW">
+                            <field name="NUM">1</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="o0fX-h?RD;KcE,NRW[M`">
+                        <field name="VAR" id="lh+|6|zk1kY]hk]ccg/t">ufo stop loss</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="text_print" id=",1*D@C`G$QJrTNfeaotY">
+                    <value name="TEXT">
+                      <shadow type="text" id="QKvtRh=|~$@@M=iK-kJc">
+                        <field name="TEXT">STOP LOSS HIT</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="trade_again" id=",.U+eVhmg3,06sj^|23t"></block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="trade_definition" id="?qK=FQ0=(,5.@X348(sr" deletable="false" x="0" y="60">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="nHrO3o#o[)Kz$:j`Nf6!" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">1HZ10V</field>
+        <next>
+          <block type="trade_definition_tradetype" id="x-dO6d-wEZ`a9KhtQY/Z" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">evenodd</field>
+            <next>
+              <block type="trade_definition_contracttype" id="Eb$q+5W8{aS.^qEw5VF)" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id=".GS8T)lU5$V*Nf%vmy0=" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="QK:0a0nd?Y`sl)YXl)rN" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id=",Q,D_9F35x~qR@M|U7H/" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="mY)7tcAa}Da+p|kX~Po}">
+        <field name="VAR" id="LmE|+R/nSd8{j+h%UK?a">Ufo stake</field>
+        <value name="VALUE">
+          <block type="math_number" id="zxcuVxq59H.?UU~h*J$!">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="~GB*_o@*6zE.wM-cy76k">
+            <field name="VAR" id="w/hY)NyDi)f90A6De;b7">ufo martingale stake</field>
+            <value name="VALUE">
+              <block type="variables_get" id="44L$r[Nk7E56Ky2]Gimq">
+                <field name="VAR" id="LmE|+R/nSd8{j+h%UK?a">Ufo stake</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="mB}jpm$047+E1rrsD%f~">
+                <field name="VAR" id="tE#0Luv|#b/KKmH;4HBY">ufo martingale size</field>
+                <value name="VALUE">
+                  <block type="math_number" id="kgWJDyYY%TE:4avRUh~)">
+                    <field name="NUM">1.2</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="gP)MH[}QEkJV,2Bg}b5X">
+                    <field name="VAR" id="88L3cc]lb7k)$o16XSV!">ufo target profit</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="|QOPcD:]SiS8EKD]IW`q">
+                        <field name="NUM">20</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="19]CIe=SGU7[A``E^Y*t">
+                        <field name="VAR" id="lh+|6|zk1kY]hk]ccg/t">ufo stop loss</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="}DF=-PqF+20C9a.Z]AA1">
+                            <field name="NUM">34</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="controls_repeat_ext" id="^uSyFH3L_T(z/`+=j8CO">
+        <value name="TIMES">
+          <block type="math_constant" id="64_`y-cL1bah@dwGMb*`">
+            <field name="CONSTANT">INFINITY</field>
+          </block>
+        </value>
+        <statement name="DO">
+          <block type="tick_delay" id="K*ui$772V10I=q5n:!*F">
+            <statement name="TICKDELAYSTACK">
+              <block type="variables_set" id="jsfM6mYwst2csd[DDbj-">
+                <field name="VAR" id="U9kr51T48qB5*Rf:pUwM">ufo odd count</field>
+                <value name="VALUE">
+                  <block type="math_number" id="w_+OT43EhO`JH1#[?[[s">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="x}R*-x0I1;./%]]POnox">
+                    <field name="VAR" id="#d@L(2G@#rT{+ZEnZjY]">ufo even count</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="6W,Q4xEbBdTSW%}^7YT;">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="1kYc)i7U2TnvydI*JcQ2">
+                        <field name="VAR" id="|%g]sUNDZ6?2m3E$6@38">ufo digit list</field>
+                        <value name="VALUE">
+                          <block type="lists_getSublist" id="XG55f4:{;(3,%xPuMGs(">
+                            <mutation xmlns="http://www.w3.org/1999/xhtml" at1="true" at2="false"></mutation>
+                            <field name="WHERE1">FROM_END</field>
+                            <field name="WHERE2">LAST</field>
+                            <value name="LIST">
+                              <block type="lastDigitList" id="}5!!5}Dd+z?!C$yJjzys"></block>
+                            </value>
+                            <value name="AT1">
+                              <block type="math_number" id="4:`2VEi_wV7w$1^f79$V">
+                                <field name="NUM">3</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="text_join" id="PynY3o;-W4u2N,gOnhS4">
+                            <field name="VARIABLE" id="MOovH8rV:MC)Qj78ZBiR">text</field>
+                            <statement name="STACK">
+                              <block type="text_statement" id="Dgi$lE2tTl1GL~klC2|c">
+                                <value name="TEXT">
+                                  <shadow type="text" id="9hda@OKt2;n_iM^P]jOy">
+                                    <field name="TEXT">ufo last 3 digit scan</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="text_statement" id="#IyFZm9qdmqM@%N4*mIj">
+                                    <value name="TEXT">
+                                      <shadow type="text" id="lkJrnip7wbsp.a!^F9J5">
+                                        <field name="TEXT"></field>
+                                      </shadow>
+                                      <block type="variables_get" id="B.-}ryUigiSS|AfF`|:f">
+                                        <field name="VAR" id="|%g]sUNDZ6?2m3E$6@38">ufo digit list</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="notify" id="V0X1NCi_oC_C2uWU$N*p">
+                                <field name="NOTIFICATION_TYPE">success</field>
+                                <field name="NOTIFICATION_SOUND">silent</field>
+                                <value name="MESSAGE">
+                                  <shadow type="text" id="2O.)0aS74dsclb.{Y1:`">
+                                    <field name="TEXT">abc</field>
+                                  </shadow>
+                                  <block type="variables_get" id="6GQ)80QdZ=yo]u!ALN[1">
+                                    <field name="VAR" id="MOovH8rV:MC)Qj78ZBiR">text</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_forEach" id="a+/fg[tlD0qBlrl.{(:e">
+                                    <field name="VAR" id="lv?kk}wM0*2UAv_r{qf.">i</field>
+                                    <value name="LIST">
+                                      <block type="variables_get" id="UN{j_-0vKV]Q/msFLtL#">
+                                        <field name="VAR" id="|%g]sUNDZ6?2m3E$6@38">ufo digit list</field>
+                                      </block>
+                                    </value>
+                                    <statement name="DO">
+                                      <block type="controls_if" id="IQOtOtVwtDhnHSU,sB%C">
+                                        <value name="IF0">
+                                          <block type="math_number_property" id="D;QMbMy|xC~=p?KYn*N|">
+                                            <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+                                            <field name="PROPERTY">EVEN</field>
+                                            <value name="NUMBER_TO_CHECK">
+                                              <shadow type="math_number" id="6yU(h(R.Vi!dlONU.0$Y">
+                                                <field name="NUM">0</field>
+                                              </shadow>
+                                              <block type="variables_get" id="a$K}NNv?RxF(MLyNy?DY">
+                                                <field name="VAR" id="lv?kk}wM0*2UAv_r{qf.">i</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="math_change" id="|F3-Fipf0qsee%k6;({2">
+                                            <field name="VAR" id="#d@L(2G@#rT{+ZEnZjY]">ufo even count</field>
+                                            <value name="DELTA">
+                                              <shadow type="math_number" id="DD^AH+ZCi56Uh=w8zsj:">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="controls_if" id="wbtuPg!yUn9JDyH`yN5q">
+                                            <value name="IF0">
+                                              <block type="math_number_property" id="cx,*.zYbM@V%|EO:vo:c">
+                                                <mutation xmlns="http://www.w3.org/1999/xhtml" divisor_input="false"></mutation>
+                                                <field name="PROPERTY">ODD</field>
+                                                <value name="NUMBER_TO_CHECK">
+                                                  <shadow type="math_number" id="6yU(h(R.Vi!dlONU.0$Y">
+                                                    <field name="NUM">0</field>
+                                                  </shadow>
+                                                  <block type="variables_get" id="Bybf;M/DmwvT8VH_JGhL">
+                                                    <field name="VAR" id="lv?kk}wM0*2UAv_r{qf.">i</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="math_change" id="]8};jRL%Qo{p0$62aFlr">
+                                                <field name="VAR" id="U9kr51T48qB5*Rf:pUwM">ufo odd count</field>
+                                                <value name="DELTA">
+                                                  <shadow type="math_number" id="Kn65lx|0e,!ZKX0XKa}+">
+                                                    <field name="NUM">1</field>
+                                                  </shadow>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="controls_if" id="x1p(D%SYwQdx?=+M7MMy">
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="E-|*`HNurV0H6sg*Nsj:">
+                                            <field name="OP">EQ</field>
+                                            <value name="A">
+                                              <block type="variables_get" id="ZisfS6^iL#JY_}ixBWcn">
+                                                <field name="VAR" id="#d@L(2G@#rT{+ZEnZjY]">ufo even count</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="math_number" id="rIcUmEVUl1!GbM][Go=U">
+                                                <field name="NUM">3</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="variables_set" id="okbMOI6[D:Ve;6Mjl.9y">
+                                            <field name="VAR" id="jvfK:Rrnx^y:1z]yxlt*">ufo trade type</field>
+                                            <value name="VALUE">
+                                              <block type="math_number" id="O6djJnJ@%VO3HfAog1nr">
+                                                <field name="NUM">1</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="controls_flow_statements" id="MDS;GY3:~zYQ1T7}vG{O">
+                                                <field name="FLOW">BREAK</field>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="controls_if" id=",ryxU[;MG2Uw~xH${1qA">
+                                            <value name="IF0">
+                                              <block type="logic_compare" id="tOqYKH7y1!,%HxNT[V1k">
+                                                <field name="OP">EQ</field>
+                                                <value name="A">
+                                                  <block type="variables_get" id="]t#isuhJ5lxcHN2y5;tU">
+                                                    <field name="VAR" id="U9kr51T48qB5*Rf:pUwM">ufo odd count</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number" id="=RJoh3(k1c@OX9h.~fTD">
+                                                    <field name="NUM">3</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="variables_set" id="7t^NawpK#VX]zm69R_R2">
+                                                <field name="VAR" id="jvfK:Rrnx^y:1z]yxlt*">ufo trade type</field>
+                                                <value name="VALUE">
+                                                  <block type="math_number" id="m_bZWR+UXPbb5Zv+zCJR">
+                                                    <field name="NUM">2</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="controls_flow_statements" id="ZRu5k,3]?Z=vbi^ya[P)">
+                                                    <field name="FLOW">BREAK</field>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="TICKDELAYVALUE">
+              <block type="math_number" id="($Fdfz4|eXh*0qL^5xyX">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="trade_definition_tradeoptions" id="b#YltZJn4WW[kTw/Ls=.">
+            <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="false"></mutation>
+            <field name="DURATIONTYPE_LIST">t</field>
+            <value name="DURATION">
+              <shadow type="math_number" id=".HHyD03$7[5h86?T{/pi">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+            <value name="AMOUNT">
+              <shadow type="math_number" id="?4z^xhq6AFSH~XB)j4|@">
+                <field name="NUM">0.35</field>
+              </shadow>
+              <block type="variables_get" id="1rajdtBV_(`Xm,]}CGxl">
+                <field name="VAR" id="w/hY)NyDi)f90A6De;b7">ufo martingale stake</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="ZXcfccN7_NMU!5L)I5^H" deletable="false" x="0" y="2208">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="controls_if" id="9kb,Y+RA~POijw:ITN]0">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="^:pCHVl5Uj5`=It@|-[9">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="variables_get" id=".qbf}qH$2y-Qo!1Ke.RR">
+                <field name="VAR" id="jvfK:Rrnx^y:1z]yxlt*">ufo trade type</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="[AYu3_}VE~OgxUxH6;gm">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="purchase" id="kO%pX3o8@$|*Qv$ZJj9Z">
+            <field name="PURCHASE_LIST">DIGITODD</field>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="purchase" id="_)2mK|n3hBzi?a2b`p6{">
+            <field name="PURCHASE_LIST">DIGITEVEN</field>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

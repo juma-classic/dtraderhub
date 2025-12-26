@@ -1,0 +1,231 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <variables>
+    <variable id="^ZJD*~{Z/KmB$/R$Q0bB">SIR ALEX SPEED BOT \uD83D\uDC9A</variable>
+    <variable id="o6G%Sde6MBsXqtNVweSn">Sir Alex Greens</variable>
+  </variables>
+  <block type="trade_definition" id="WAQcFAB-CV83=oyGf[Vf" deletable="false" x="0" y="50">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="q(jB]%G^L~P4fC(pHK);" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">R_100</field>
+        <next>
+          <block type="trade_definition_tradetype" id="HLUzgp-v:#XsIVw@lfRm" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">overunder</field>
+            <next>
+              <block type="trade_definition_contracttype" id="/9YPx}M93]IJ`ox-7vPQ" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="f;A{K|IhJAON?8H.nszO" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="Fb3@iM)dq9/CE@I$2zTw" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="b7*:j/B=n|=}7bt@l@D)" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="INITIALIZATION">
+      <block type="variables_set" id="V*BK+8F9I)gw7kAp]:Th">
+        <field name="VAR" id="^ZJD*~{Z/KmB$/R$Q0bB">SIR ALEX SPEED BOT \uD83D\uDC9A</field>
+        <value name="VALUE">
+          <block type="math_number" id="ZjWu!A%rUm},Tg,h9gut">
+            <field name="NUM">5</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="Fk:@p7KIg:jKt0`y2+Q~">
+            <field name="VAR" id="o6G%Sde6MBsXqtNVweSn">Sir Alex Greens</field>
+            <value name="VALUE">
+              <block type="math_number" id="A`B+?7Z:qHISqpoZe)g+">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="text_print" id="=RzD{.f1IbL*f:-T3HQh">
+                <value name="TEXT">
+                  <shadow type="text" id="Qnli3x_LcSV7Oz_yO[[j">
+                    <field name="TEXT">SIR ALEX SPEED BOT \uD83D\uDC9A\uD83D\uDCC9</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="FhG``on)LE1lejT/M1Fp">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <value name="DURATION">
+          <shadow type="math_number" id="#tc8env2^/x)%.`en|pV">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number" id="6zm8m=K4?uMBZ@8C`h4:">
+            <field name="NUM">1</field>
+          </shadow>
+          <block type="variables_get" id="*lqh-@O*Y1@BCc})ez!X">
+            <field name="VAR" id="^ZJD*~{Z/KmB$/R$Q0bB">SIR ALEX SPEED BOT \uD83D\uDC9A</field>
+          </block>
+        </value>
+        <value name="PREDICTION">
+          <shadow type="math_number" id="z2~W9/,%|SjxRk+)[D8T">
+            <field name="NUM">7</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="after_purchase" id="U,B/r:GW15+t3;xH8k]@" x="3" y="719">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="controls_if" id="L!5CWo=$0hh?L;QuRT()">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" else="1"></mutation>
+        <value name="IF0">
+          <block type="contract_check_result" id="n,L,Fs:MekmH/:m_0Wc9">
+            <field name="CHECK_RESULT">win</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="G|%~vwxMKk9T-@|fn%d5">
+            <field name="VAR" id="^ZJD*~{Z/KmB$/R$Q0bB">SIR ALEX SPEED BOT \uD83D\uDC9A</field>
+            <value name="VALUE">
+              <block type="math_number" id="}2q}2%YH2hG}*/XmSxA(">
+                <field name="NUM">0.35</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="s2H!XirC_p|Ab1`5V0Jk">
+                <field name="VAR" id="o6G%Sde6MBsXqtNVweSn">Sir Alex Greens</field>
+                <value name="VALUE">
+                  <block type="math_number" id="~;prp0Ke(aW=[b`yx0[S">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="variables_set" id="cde*pKeAYFEbcyN+Jgd$">
+            <field name="VAR" id="^ZJD*~{Z/KmB$/R$Q0bB">SIR ALEX SPEED BOT \uD83D\uDC9A</field>
+            <value name="VALUE">
+              <block type="math_arithmetic" id="|0Q)RUqzutVh}VIb-H$Z">
+                <field name="OP">MULTIPLY</field>
+                <value name="A">
+                  <shadow type="math_number" id="5a3%e?-~6F7D2Wxm^`w3">
+                    <field name="NUM">1</field>
+                  </shadow>
+                  <block type="variables_get" id=":z0!VgZ8p4M3-eLzK]g*">
+                    <field name="VAR" id="^ZJD*~{Z/KmB$/R$Q0bB">SIR ALEX SPEED BOT \uD83D\uDC9A</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="ex-E!Na|9Q^,Oan,sG3U">
+                    <field name="NUM">2.1</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="EXU4G0DL]7CHf$DPL}0|">
+                <field name="VAR" id="o6G%Sde6MBsXqtNVweSn">Sir Alex Greens</field>
+                <value name="VALUE">
+                  <block type="math_arithmetic" id="ApFCd8`NoFIPJLacv#@o">
+                    <field name="OP">ADD</field>
+                    <value name="A">
+                      <shadow type="math_number" id="_gt-Nv;j/pkVX=Zu06DR">
+                        <field name="NUM">1</field>
+                      </shadow>
+                      <block type="variables_get" id="x``zze.-+uCf~d!zx7bz">
+                        <field name="VAR" id="o6G%Sde6MBsXqtNVweSn">Sir Alex Greens</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="Ko;x6SG^2+zvq-#gKwYI">
+                        <field name="NUM">1</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="trade_again" id="@,(c%^;Zho,^ACg}kv3("></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="6vv3%5r!.k$ymO4`)DF9" deletable="false" x="-15" y="1245">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="controls_if" id="pg:#S-|2%rz5iUtBS]X(">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" elseif="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="!}VekmkYfs[UjFXy%1!5">
+            <field name="OP">LTE</field>
+            <value name="A">
+              <block type="variables_get" id="vt(@q~LDu6jZR-}gEtTw">
+                <field name="VAR" id="o6G%Sde6MBsXqtNVweSn">Sir Alex Greens</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id=";QIk296t6!LXEwG[`pnL">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="purchase" id="oEdnsUeyGh;^)J-IwWRA">
+            <field name="PURCHASE_LIST">DIGITUNDER</field>
+          </block>
+        </statement>
+        <value name="IF1">
+          <block type="logic_compare" id="0E#2ltj*?iP~fp1KgRs5">
+            <field name="OP">GTE</field>
+            <value name="A">
+              <block type="variables_get" id="Wc/nJG%guOS{cS[LnNqc">
+                <field name="VAR" id="o6G%Sde6MBsXqtNVweSn">Sir Alex Greens</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="}i}}.t0=`9^k$udiO$lL">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO1">
+          <block type="timeout" id="aeAlVQ0#1)J}N_izmb4}">
+            <statement name="TIMEOUTSTACK">
+              <block type="purchase" id="+tMk.OI@7CZ2s828J-ZD">
+                <field name="PURCHASE_LIST">DIGITUNDER</field>
+              </block>
+            </statement>
+            <value name="SECONDS">
+              <shadow type="math_number" id="LvaK!^U(h08+801hPa]7">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>
