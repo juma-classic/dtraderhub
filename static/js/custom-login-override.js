@@ -19,15 +19,19 @@
      * @param {string} language - Language code (default: 'EN')
      * @returns {string} Complete OAuth URL
      */
-    function generateTradersDenOAuthURL(language = 'EN') {
-        const params = new URLSearchParams({
-            app_id: TRADERSDEN_CONFIG.APP_ID,
-            l: language.toUpperCase(),
-            brand: TRADERSDEN_CONFIG.BRAND
-        });
-        
-        return `${TRADERSDEN_CONFIG.OAUTH_BASE_URL}?${params.toString()}`;
-    }
+    // FIXED VERSION:
+function generateTradersDenOAuthURL(language = 'EN') {
+    const redirect_uri = encodeURIComponent(window.location.origin + '/callback');
+    
+    const params = new URLSearchParams({
+        app_id: TRADERSDEN_CONFIG.APP_ID,
+        l: language.toUpperCase(),
+        brand: TRADERSDEN_CONFIG.BRAND,
+        redirect_uri: redirect_uri  // ADD THIS!
+    });
+    
+    return `${TRADERSDEN_CONFIG.OAUTH_BASE_URL}?${params.toString()}`;
+}
     
     /**
      * Handle login button click with TradersDen configuration
